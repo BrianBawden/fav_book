@@ -19,7 +19,7 @@ def menu():
     print("1. Add book")
     print("1. Search books")
     print("3. Delete book")
-    print("4. exit menu")
+    print("0. exit menu")
 
     selection = input()
 
