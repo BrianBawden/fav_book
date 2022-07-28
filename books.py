@@ -8,7 +8,6 @@ def menu():
     print("1. Add book")
     print("1. Search books")
     print("3. Delete  book")
-    print("0. Exit")
 
     selection = input()
 
@@ -17,9 +16,7 @@ def menu():
     elif selection == 2:
         search_book()
     elif selection == 3:
-        delete_book()
-    elif selection == 0:
         return None
     else:
         print("Invalid selection")
-        menu():
+        menu()
