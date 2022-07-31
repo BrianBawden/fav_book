@@ -1,2 +1,3 @@
-['Title', 'Author', 'pages', 'notes']
-['Hatchet', 'Gary Paulson', '120', 'this is my favorite book']
+Title,Author,Genre,pages,notes
+Hatchet,Gary Paulsen,Fiction,120,this is my favorite book
+Harry Potter,JK Rowling,Fantasy,365,Zoe's favorite
