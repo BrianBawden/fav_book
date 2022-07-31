@@ -1,3 +1,9 @@
+
+from os.path import exists as file_exists
+import csv
+
+
+
 def main():
     books = True
 
@@ -16,6 +22,9 @@ def get_user():
     print(f"Welcome {user_name}." )
 
 def menu():
+
+    book_list = "book_list.csv"
+
     print("1. Add book")
     print("1. Search books")
     print("3. Delete book")
@@ -26,7 +35,7 @@ def menu():
     if selection == "1":
         add_book()
     elif selection == "2":
-        search_book()
+        search_book(book_list)
     elif selection == "3":
         delete_book()
     elif selection == "0":
@@ -38,8 +47,18 @@ def menu():
 def add_book():
     print("add")
 
-def search_book():
+    # "I decided to get the program to read the file first."
+    # book_list = "book_list.csv"
+    # if file_exists(book_list):
+    #     with open(book_list, "a") as csv_file:
+    #         csv_
+    # print("add done")
+
+
+def search_book(file):
     print("search")
+    if file_exists(file)
+    print("search done")
 
 def delete_book():
     print("delete")
