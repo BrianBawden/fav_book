@@ -56,13 +56,25 @@ def add_book():
 
 
 def search_book(file):
-    print("search")
+    print("0. Title")
+    print("1. Author")
+    print("2. Genres")
+    search_by = int(input("Please enter selection: "))
+    user_search = input("Enter your search: ")
+
     if file_exists(file):
-        print("Found file")
+        with open(file, "r") as csv_file:
+            reader = csv.reader(csv_file)
+            next(reader)
+
+            for item in reader:
+                if item[search_by] == user_search:
+                    print(item)
     print("search done")
 
 def delete_book():
     print("delete")
 
 
-main()
+# main()
+search_book("book_list.csv")
