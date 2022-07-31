@@ -33,7 +33,7 @@ def menu():
     selection = input()
 
     if selection == "1":
-        add_book()
+        add_book(book_list)
     elif selection == "2":
         search_book(book_list)
     elif selection == "3":
@@ -44,15 +44,22 @@ def menu():
         print("Invalid selection")
         menu()
 
-def add_book():
-    print("add")
+def add_book(file):
 
-    # "I decided to get the program to read the file first."
-    # book_list = "book_list.csv"
-    # if file_exists(book_list):
-    #     with open(book_list, "a") as csv_file:
-    #         csv_
-    # print("add done")
+    new_title = input("Enter the title: ")
+    new_author = input("Enter the author: ")
+    new_genre = input("Enter the genre: ")
+    new_page = input("Enter the number of page: ")
+    new_notes = input("Enter the notes: ")
+
+    fields = ["Title", "Author", "Genre", "Pages", "Notes"]
+    fields_dict = {"Title": new_title, "Author": new_author, "Genre": new_genre, "Pages": new_page, "Notes": new_notes}
+
+    if file_exists(file):
+        with open(file, "a") as csv_file:
+            dict_object = csv.DictWriter(csv_file, fieldnames=fields)
+
+            dict_object.writerow(fields_dict)
 
 
 def search_book(file):
@@ -70,11 +77,11 @@ def search_book(file):
             for item in reader:
                 if item[search_by] == user_search:
                     print(item)
-    print("search done")
 
 def delete_book():
     print("delete")
 
 
 # main()
+# add_book("book_list.csv")
 search_book("book_list.csv")
