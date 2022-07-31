@@ -26,7 +26,7 @@ def menu():
     book_list = "book_list.csv"
 
     print("1. Add book")
-    print("1. Search books")
+    print("2. Search books")
     print("3. Delete book")
     print("0. exit menu")
 
@@ -57,7 +57,8 @@ def add_book():
 
 def search_book(file):
     print("search")
-    if file_exists(file)
+    if file_exists(file):
+        print("Found file")
     print("search done")
 
 def delete_book():
