@@ -1,8 +1,9 @@
 
-from os.path import exists as file_exists
+# from os.path import exists as file_exists
+import os
 import csv
 
-
+file_exists = os.path.exists
 
 def main():
     books = True
@@ -37,7 +38,7 @@ def menu():
     elif selection == "2":
         search_book(book_list)
     elif selection == "3":
-        delete_book()
+        delete_book(book_list)
     elif selection == "0":
         return None
     else:
@@ -78,14 +79,28 @@ def search_book(file):
             for item in reader:
                 if item[search_by] == user_search:
                     search_list.append(item)
-            return search_list
+                    print(item)
+            return search_list, search_by, user_search
 
-def delete_book():
-    print("Enter information to be deleted:")
-    search_book()
-    print("delete")
+def delete_book(file):
+
+    print("Enter book information to be deleted:")
+    delete_list, search_by, user_search = search_book(file)
+
+    with open(file, "r") as inp, open("temp_file.csv", "w+") as out:
+        writer = csv.writer(out)
+        for row in csv.reader(inp):
+            if row[search_by] != user_search:
+                writer.writerow(row)
+
+        if file_exists(file):
+            os.remove(file)
+            os.rename("temp_file.csv", file)
+            print("deleted")
 
 
-# main()
+    
+main()
 # add_book("book_list.csv")
-print(search_book("book_list.csv"))
+# print(search_book("book_list.csv"))
+# delete_book("book_list.csv")
