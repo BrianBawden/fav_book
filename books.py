@@ -30,6 +30,8 @@ def menu():
     print("2. Search books")
     print("3. Delete book")
     print("4. Print books")
+    print("5. Edit book")
+    print("6. Total pages read")
     print("0. exit menu")
 
     selection = input()
@@ -44,6 +46,8 @@ def menu():
         p_books(book_list)
     elif selection == "5":
         edit_book(book_list)
+    elif selection == "6":
+        pages_read(book_list)
     elif selection == "0":
         return None
     else:
@@ -89,7 +93,6 @@ def search_book(file):
 
 def delete_book(file):
 
-    # print("Enter book information to be deleted:")
     delete_list, search_by, user_search = search_book(file)
 
     with open(file, "r") as inp, open("temp_file.csv", "w+") as out:
@@ -101,7 +104,6 @@ def delete_book(file):
         if file_exists(file):
             os.remove(file)
             os.rename("temp_file.csv", file)
-            print("deleted")
 
 def p_books(file):
     count = 1
@@ -117,10 +119,21 @@ def edit_book(file):
     print("What book do you want to edit: ")
     delete_book(file)
     add_book(file)
+
+def pages_read(file):
+
+    read_pages = 0
+    with open(file, "r") as books:
+        view_books = csv.reader(books)
+        next(view_books)
+        for row in view_books:
+            read_pages += int(row[3])
+        print(f"Pages read: {read_pages}")
     
-# main()
+main()
 # add_book("book_list.csv")
 # print(search_book("book_list.csv"))
 # delete_book("book_list.csv")
 # p_books("book_list.csv")
-edit_book("book_list.csv")
+# edit_book("book_list.csv")
+# pages_read("book_list.csv")
