@@ -29,6 +29,7 @@ def menu():
     print("1. Add book")
     print("2. Search books")
     print("3. Delete book")
+    print("4. Print books")
     print("0. exit menu")
 
     selection = input()
@@ -39,6 +40,8 @@ def menu():
         search_book(book_list)
     elif selection == "3":
         delete_book(book_list)
+    elif selection == "4":
+        p_books(book_list)
     elif selection == "0":
         return None
     else:
@@ -98,9 +101,18 @@ def delete_book(file):
             os.rename("temp_file.csv", file)
             print("deleted")
 
-
+def p_books(file):
+    count = 1
+    with open(file, "r") as books:
+        view_books = csv.reader(books)
+        next(view_books)
+        for row in view_books:
+            print(f"{count}. {row[0]} by {row[1]}")
+            count += 1
+            
     
 main()
 # add_book("book_list.csv")
 # print(search_book("book_list.csv"))
 # delete_book("book_list.csv")
+# p_books("book_list.csv")
