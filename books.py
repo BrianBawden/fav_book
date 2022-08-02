@@ -9,7 +9,7 @@ def main():
     books = True
 
     while books == True:
-        user_input = input("Do you want run books? (y/n): ")
+        user_input = input("Run Menu? (y/n): ")
         if user_input.strip().lower()[0] == "y":
             menu()
         elif user_input.strip().lower()[0] == "n":
