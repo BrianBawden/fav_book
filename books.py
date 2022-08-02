@@ -42,6 +42,8 @@ def menu():
         delete_book(book_list)
     elif selection == "4":
         p_books(book_list)
+    elif selection == "5":
+        edit_book(book_list)
     elif selection == "0":
         return None
     else:
@@ -87,7 +89,7 @@ def search_book(file):
 
 def delete_book(file):
 
-    print("Enter book information to be deleted:")
+    # print("Enter book information to be deleted:")
     delete_list, search_by, user_search = search_book(file)
 
     with open(file, "r") as inp, open("temp_file.csv", "w+") as out:
@@ -110,9 +112,15 @@ def p_books(file):
             print(f"{count}. {row[0]} by {row[1]}")
             count += 1
             
+def edit_book(file):
     
-main()
+    print("What book do you want to edit: ")
+    delete_book(file)
+    add_book(file)
+    
+# main()
 # add_book("book_list.csv")
 # print(search_book("book_list.csv"))
 # delete_book("book_list.csv")
 # p_books("book_list.csv")
+edit_book("book_list.csv")
