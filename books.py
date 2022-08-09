@@ -2,6 +2,7 @@
 # from os.path import exists as file_exists
 import os
 import csv
+import tkinter as tk
 
 file_exists = os.path.exists
 
@@ -106,13 +107,28 @@ def delete_book(file):
             os.rename("temp_file.csv", file)
 
 def p_books(file):
-    count = 1
-    with open(file, "r") as books:
-        view_books = csv.reader(books)
-        next(view_books)
-        for row in view_books:
-            print(f"{count}. {row[0]} by {row[1]}")
-            count += 1
+
+    # Create and set the GUI for the book_list_window view.
+    book_list_window = tk.Tk()
+    book_list_window.resizable(width=False, height=False)
+    book_list_window.title("Book List")
+
+    col_names = ("Title","Author","Genre","Pages","Notes")
+    for i, col_name in enumerate(col_names, start=0):
+        tk.Label(book_list_window, text=col_name).grid(row=3, column=i, padx=40)
+
+    with open(file, "r", newline="") as passfile:
+        reader = csv.reader(passfile)
+        next(reader)
+        data = list(reader)
+
+    entrieslist = []
+    for i, row in enumerate(data, start=4):
+        entrieslist.append(row[0])
+        for col in range(0, 5):
+            tk.Label(book_list_window, text=row[col]).grid(row=i, column=col)
+
+    book_list_window.mainloop()
             
 def edit_book(file):
     
