@@ -128,6 +128,11 @@ def p_books(file):
         for col in range(0, 5):
             tk.Label(book_list_window, text=row[col]).grid(row=i, column=col)
 
+    # The close_button will stop the window and the program continues, but the window doesn't close itself.
+
+
+    # close_button = tk.Button(book_list_window, text="Close", command=book_list_window.destroy).grid(column=0, row=6, sticky=tk.W, pady=10)
+
     book_list_window.mainloop()
             
 def edit_book(file):
