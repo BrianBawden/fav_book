@@ -6,18 +6,6 @@ import tkinter as tk
 
 file_exists = os.path.exists
 
-def main():
-    books = True
-
-    while books == True:
-        user_input = input("Run Menu? (y/n): ")
-        if user_input.strip().lower()[0] == "y":
-            menu()
-        elif user_input.strip().lower()[0] == "n":
-            books = False
-        else:
-            print("invalid entry try again")
-            main()
 
 def get_user():
     user_name = input("Enter Your user name: ")
@@ -50,27 +38,82 @@ def menu():
     elif selection == "6":
         pages_read(book_list)
     elif selection == "0":
-        return None
+        run_books = False
     else:
         print("Invalid selection")
         menu()
 
 def add_book(file):
 
-    new_title = input("Enter the title: ")
-    new_author = input("Enter the author: ")
-    new_genre = input("Enter the genre: ")
-    new_page = input("Enter the number of page: ")
-    new_notes = input("Enter the notes: ")
 
-    fields = ["Title", "Author", "Genre", "Pages", "Notes"]
-    fields_dict = {"Title": new_title, "Author": new_author, "Genre": new_genre, "Pages": new_page, "Notes": new_notes}
+    # add book function
+    def add_book_function():
+        # csv file to add to list
+        csv_book = "/Users/brian/projects/fav_book/book_list.csv"
 
-    if file_exists(file):
-        with open(file, "a") as csv_file:
-            dict_object = csv.DictWriter(csv_file, fieldnames=fields)
 
-            dict_object.writerow(fields_dict)
+        try:
+
+            fields = ["Title", "Author", "Genre", "Pages", "Notes"]
+            fields_dict = {"Title": new_title.get(), "Author": new_author.get(), "Genre": new_genre.get(), "Pages": new_pages.get(), "Notes": new_notes.get()}
+
+            with open(csv_book, "a") as csv_file:
+                dict_object = csv.DictWriter(csv_file, fieldnames=fields)
+
+                dict_object.writerow(fields_dict)
+
+            clear()
+
+        except ValueError:
+            pass
+
+    def clear():
+        [widget.delete(0, tk.END) for widget in add_book_window.winfo_children() if isinstance(widget, tk.Entry)]
+
+
+    # create add_book_window
+    add_book_window = tk.Tk()
+    add_book_window.geometry("600x350")
+    add_book_window.title("Add Book")
+
+    # make labels from add_labels visible in add_book_window with a for loop and enumerate
+    add_labels = ("Title: ", "Author: ", "Genre", "Pages: ", "Notes: ")
+    for i, add_label in enumerate(add_labels, start=0):
+        tk.Label(add_book_window, text=add_label).grid(row=i, column=0, padx=15, pady=10)
+
+
+    # set up entry boxes for the new book
+    new_title = tk.StringVar()
+    title_entry = tk.Entry(add_book_window, textvariable=new_title, font= "ariel 20")
+    title_entry.grid(column=1, row=0, sticky=tk.W, padx=15, pady=10)
+
+    new_author = tk.StringVar()
+    author_entry = tk.Entry(add_book_window, textvariable=new_author, font= "ariel 20")
+    author_entry.grid(column=1, row=1, sticky=tk.W, padx=15, pady=10)
+
+    new_genre = tk.StringVar()
+    genre_entry = tk.Entry(add_book_window, textvariable=new_genre, font= "ariel 20")
+    genre_entry.grid(column=1, row=2, sticky=tk.W, padx=15, pady=10)
+
+    new_pages = tk.StringVar()
+    pages_entry = tk.Entry(add_book_window, textvariable=new_pages, font= "ariel 20")
+    pages_entry.grid(column=1, row=3, sticky=tk.W, padx=15, pady=10)
+
+    new_notes = tk.StringVar()
+    notes_entry = tk.Entry(add_book_window, textvariable=new_notes, font= "ariel 20")
+    notes_entry.grid(column=1, row=4, sticky=tk.W, padx=15, pady=10)
+
+
+    # Add and cancel buttons
+    add_button = tk.Button(add_book_window, text="Add Book", command=add_book_function).grid(column=0, row=5, padx=15, pady=10)
+
+    cancel_button = tk.Button(add_book_window, text="Cancel", command=lambda: [add_book_window.destroy()]).grid(column=1, row=5, sticky=tk.W, pady=10)
+
+    menu()
+
+    # End of add_book_window
+    add_book_window.mainloop()
+
 
 
 def search_book(file):
@@ -129,6 +172,8 @@ def p_books(file):
             tk.Label(book_list_window, text=row[col]).grid(row=i, column=col)
 
     book_list_window.mainloop()
+
+    menu()
             
 def edit_book(file):
     
@@ -146,10 +191,5 @@ def pages_read(file):
             read_pages += int(row[3])
         print(f"Pages read: {read_pages}")
     
-main()
-# add_book("book_list.csv")
-# print(search_book("book_list.csv"))
-# delete_book("book_list.csv")
-# p_books("book_list.csv")
-# edit_book("book_list.csv")
-# pages_read("book_list.csv")
+menu()
+
