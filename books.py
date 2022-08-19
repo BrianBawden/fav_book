@@ -74,6 +74,7 @@ def add_book(file):
     # create add_book_window
     add_book_window = tk.Tk()
     add_book_window.geometry("600x350")
+    add_book_window.eval('tk::PlaceWindow . center')
     add_book_window.title("Add Book")
 
     # make labels from add_labels visible in add_book_window with a for loop and enumerate
@@ -154,6 +155,7 @@ def p_books(file):
     # Create and set the GUI for the book_list_window view.
     book_list_window = tk.Tk()
     book_list_window.resizable(width=False, height=False)
+    book_list_window.eval('tk::PlaceWindow . center')
     book_list_window.title("Book List")
 
     col_names = ("Title","Author","Genre","Pages","Notes")
@@ -190,6 +192,7 @@ def pages_read(file):
 
     read_window = tk.Tk()
     read_window.resizable(width=False, height=False)
+    read_window.eval('tk::PlaceWindow . center')
     read_window.title("Total Pages Read")
 
     read_pages = 0
