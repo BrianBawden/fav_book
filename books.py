@@ -158,7 +158,7 @@ def p_books(file):
 
     col_names = ("Title","Author","Genre","Pages","Notes")
     for i, col_name in enumerate(col_names, start=0):
-        tk.Label(book_list_window, text=col_name).grid(row=3, column=i, padx=40)
+        tk.Label(book_list_window, text=col_name, padx=10, pady=10).grid(row=3, column=i, padx=40)
 
     with open(file, "r", newline="") as passfile:
         reader = csv.reader(passfile)
@@ -169,7 +169,7 @@ def p_books(file):
     for i, row in enumerate(data, start=4):
         entrieslist.append(row[0])
         for col in range(0, 5):
-            tk.Label(book_list_window, text=row[col]).grid(row=i, column=col)
+            tk.Label(book_list_window, text=row[col], padx=10, pady=10).grid(row=i, column=col)
 
     # The close_button will stop the window and the program continues, but the window doesn't close itself.
 
