@@ -38,7 +38,7 @@ def menu():
     elif selection == "6":
         pages_read(book_list)
     elif selection == "0":
-        run_books = False
+        return None
     else:
         print("Invalid selection")
         menu()
