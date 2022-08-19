@@ -204,5 +204,9 @@ def pages_read(file):
     tk.Label(read_window, text=you_read, padx=50, pady=20, font="ariel 20").pack()
 
     read_window.mainloop()
+
+    menu()
+
+    
 menu()
 
