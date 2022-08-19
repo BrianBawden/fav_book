@@ -188,13 +188,21 @@ def edit_book(file):
 
 def pages_read(file):
 
+    read_window = tk.Tk()
+    read_window.resizable(width=False, height=False)
+    read_window.title("Total Pages Read")
+
     read_pages = 0
     with open(file, "r") as books:
         view_books = csv.reader(books)
         next(view_books)
         for row in view_books:
             read_pages += int(row[3])
-        print(f"Pages read: {read_pages}")
+        # print(f"Pages read: {read_pages}")
     
+    you_read = "You have read: " + str(read_pages)
+    tk.Label(read_window, text=you_read, padx=50, pady=20, font="ariel 20").pack()
+
+    read_window.mainloop()
 menu()
 
