@@ -115,12 +115,12 @@ def delete_book(file):
             os.remove(file)
             os.rename("temp_file.csv", file)
 
-def p_books(file):
+def view_books(file):
 
     # Create and set the GUI for the book_list_window view.
     book_list_window = tk.Toplevel(menu_window)
     book_list_window.resizable(width=False, height=False)
-    book_list_window.eval('tk::PlaceWindow . center')
+    # book_list_window.eval('tk::PlaceWindow . center')
     book_list_window.title("Book List")
 
     col_names = ("Title","Author","Genre","Pages","Notes")
@@ -187,10 +187,11 @@ menu_window.geometry("600x350")
 menu_window.title("Zoe's Books")
 
 
-zoes_label = tk.Label(menu_window, text="Zoe's Books App", font="bold 20").grid(column=0, row=0, columnspan=3)
+zoes_label = tk.Label(menu_window, text="Zoe's Books App", font="bold 20").grid(column=0, row=0, columnspan=3, padx=20, pady=20)
 
-a_book = tk.Button(menu_window, text="Add Book", command=lambda: add_book(book_list)).place(x= 20, y= 40)
 
+a_book = tk.Button(menu_window, text="Add Book", command=lambda: add_book(book_list)).grid(column=0, row=1, columnspan=3, padx=20, pady=20)
+v_book = tk.Button(menu_window, text="View Books", command=lambda: view_books(book_list)).grid(column=0, row=2, columnspan=3, padx=20, pady=20)
 
 
 menu_window.mainloop()
