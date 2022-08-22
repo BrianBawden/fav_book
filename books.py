@@ -192,6 +192,7 @@ zoes_label = tk.Label(menu_window, text="Zoe's Books App", font="bold 20").grid(
 
 a_book = tk.Button(menu_window, text="Add Book", command=lambda: add_book(book_list)).grid(column=0, row=1, columnspan=3, padx=20, pady=20)
 v_book = tk.Button(menu_window, text="View Books", command=lambda: view_books(book_list)).grid(column=0, row=2, columnspan=3, padx=20, pady=20)
+v_pages = tk.Button(menu_window, text="Total Pages", command=lambda: pages_read(book_list)).grid(column=0, row=3, columnspan=3, padx=20, pady=20)
 
 
 menu_window.mainloop()
