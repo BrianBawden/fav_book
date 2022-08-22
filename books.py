@@ -2,6 +2,7 @@
 # from os.path import exists as file_exists
 import os
 import csv
+from re import S
 import tkinter as tk
 
 file_exists = os.path.exists
@@ -117,7 +118,7 @@ def delete_book(file):
 def p_books(file):
 
     # Create and set the GUI for the book_list_window view.
-    book_list_window = tk.Tk()
+    book_list_window = tk.Toplevel(menu_window)
     book_list_window.resizable(width=False, height=False)
     book_list_window.eval('tk::PlaceWindow . center')
     book_list_window.title("Book List")
@@ -186,7 +187,7 @@ menu_window.geometry("600x350")
 menu_window.title("Zoe's Books")
 
 
-zoes_label = tk.Label(menu_window, text="Zoe's Books App", font="bold 20").place(x=menu_window.winfo_width()/2, y=20, anchor="center")
+zoes_label = tk.Label(menu_window, text="Zoe's Books App", font="bold 20").grid(column=0, row=0, columnspan=3)
 
 a_book = tk.Button(menu_window, text="Add Book", command=lambda: add_book(book_list)).place(x= 20, y= 40)
 
