@@ -15,33 +15,49 @@ def menu():
 
     book_list = "book_list.csv"
 
-    print("1. Add book")
-    print("2. Search books")
-    print("3. Delete book")
-    print("4. Print books")
-    print("5. Edit book")
-    print("6. Total pages read")
-    print("0. exit menu")
+    # Create Zoe's book list window
+    menu_window = tk.Tk()
+    menu_window.geometry("600x350")
+    menu_window.eval("tk::PlaceWindow . center")
+    menu_window.title("Zoe's Books")
 
-    selection = input()
 
-    if selection == "1":
-        add_book(book_list)
-    elif selection == "2":
-        search_book(book_list)
-    elif selection == "3":
-        delete_book(book_list)
-    elif selection == "4":
-        p_books(book_list)
-    elif selection == "5":
-        edit_book(book_list)
-    elif selection == "6":
-        pages_read(book_list)
-    elif selection == "0":
-        return None
-    else:
-        print("Invalid selection")
-        menu()
+    zoes_label = tk.Label(menu_window, text="Zoe's Books App", font="bold 20").place(x=menu_window.winfo_width()/2, y=20, anchor="center")
+
+    a_book = tk.Button(menu_window, text="Add Book", command=lambda: [menu_window.destroy(), add_book(book_list)]).place(x= 20, y= 40)
+
+    
+    
+    menu_window.mainloop()
+
+
+    # print("1. Add book")
+    # print("2. Search books")
+    # print("3. Delete book")
+    # print("4. Print books")
+    # print("5. Edit book")
+    # print("6. Total pages read")
+    # print("0. exit menu")
+
+    # selection = input()
+
+    # if selection == "1":
+    #     add_book(book_list)
+    # elif selection == "2":
+    #     search_book(book_list)
+    # elif selection == "3":
+    #     delete_book(book_list)
+    # elif selection == "4":
+    #     p_books(book_list)
+    # elif selection == "5":
+    #     edit_book(book_list)
+    # elif selection == "6":
+    #     pages_read(book_list)
+    # elif selection == "0":
+    #     return None
+    # else:
+    #     print("Invalid selection")
+    #     menu()
 
 def add_book(file):
 
