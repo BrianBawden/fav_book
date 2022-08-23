@@ -84,31 +84,56 @@ def add_book(file):
 
 def search_book(file):
 
+    def search(search_in, search_for):
+
+        search_by = search_in
+        user_search = search_for
+
+        search_list = []
+        if file_exists(file):
+            with open(file, "r") as csv_file:
+                reader = csv.reader(csv_file)
+                next(reader)
+
+                for item in reader:
+                    if item[search_by] == user_search:
+                        search_list.append(item)
+                        print(item)
+                return search_list, search_by, user_search
+
     search_book_window = tk.Toplevel(menu_window)
     search_book_window.resizable(width=False, height=False)
+    search_book_window.geometry("350x350")
     search_book_window.title("Search Books")
 
-    
+    r = tk.IntVar()
+
+    tk.Radiobutton(search_book_window, text="Title", variable=r, value=0).pack()
+    tk.Radiobutton(search_book_window, text="Author", variable=r, value=1).pack()
+    tk.Radiobutton(search_book_window, text="Genres", variable=r, value=2).pack()
+
+    user_search = tk.StringVar()
+    searching = tk.Entry(search_book_window, textvariable=user_search).pack()
+
+    tk.Button(search_book_window, text="Search", command=lambda: search(r.get(), searching)).pack()
 
     search_book_window.mainloop()
 
-    print("0. Title")
-    print("1. Author")
-    print("2. Genres")
-    search_by = int(input("Please enter selection: "))
-    user_search = input("Enter your search: ")
 
-    search_list = []
-    if file_exists(file):
-        with open(file, "r") as csv_file:
-            reader = csv.reader(csv_file)
-            next(reader)
+    # search_by = r.get()
+    # user_search = input("Enter your search: ")
 
-            for item in reader:
-                if item[search_by] == user_search:
-                    search_list.append(item)
-                    print(item)
-            return search_list, search_by, user_search
+    # search_list = []
+    # if file_exists(file):
+    #     with open(file, "r") as csv_file:
+    #         reader = csv.reader(csv_file)
+    #         next(reader)
+
+    #         for item in reader:
+    #             if item[search_by] == user_search:
+    #                 search_list.append(item)
+    #                 print(item)
+    #         return search_list, search_by, user_search
 
 def delete_book(file):
 
