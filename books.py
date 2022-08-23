@@ -182,7 +182,7 @@ book_list = "book_list.csv"
 
 # Create Zoe's book list window
 menu_window = tk.Tk()
-menu_window.geometry("600x350")
+menu_window.geometry("350x350")
 # menu_window.eval("tk::PlaceWindow . center")
 menu_window.title("Zoe's Books")
 
