@@ -83,6 +83,15 @@ def add_book(file):
 
 
 def search_book(file):
+
+    search_book_window = tk.Toplevel(menu_window)
+    search_book_window.resizable(width=False, height=False)
+    search_book_window.title("Search Books")
+
+    
+
+    search_book_window.mainloop()
+
     print("0. Title")
     print("1. Author")
     print("2. Genres")
