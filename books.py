@@ -2,7 +2,7 @@
 # from os.path import exists as file_exists
 import os
 import csv
-from re import S
+# from re import S
 import tkinter as tk
 
 file_exists = os.path.exists
@@ -86,9 +86,6 @@ def search_book(file):
 
     def search(search_in, search_for):
 
-        search_by = search_in
-        user_search = search_for
-
         search_list = []
         if file_exists(file):
             with open(file, "r") as csv_file:
@@ -96,10 +93,10 @@ def search_book(file):
                 next(reader)
 
                 for item in reader:
-                    if item[search_by] == user_search:
+                    if item[search_in] == search_for:
                         search_list.append(item)
                         print(item)
-                return search_list, search_by, user_search
+                return search_list, search_in, search_for
 
     search_book_window = tk.Toplevel(menu_window)
     search_book_window.resizable(width=False, height=False)
@@ -113,27 +110,16 @@ def search_book(file):
     tk.Radiobutton(search_book_window, text="Genres", variable=r, value=2).pack()
 
     user_search = tk.StringVar()
-    searching = tk.Entry(search_book_window, textvariable=user_search).pack()
+    searching = tk.Entry(search_book_window, textvariable=user_search)
 
-    tk.Button(search_book_window, text="Search", command=lambda: search(r.get(), searching)).pack()
+    searching.pack()
+    
+
+    tk.Button(search_book_window, text="Search", command=lambda: search(r.get(), user_search.get())).pack()
 
     search_book_window.mainloop()
 
 
-    # search_by = r.get()
-    # user_search = input("Enter your search: ")
-
-    # search_list = []
-    # if file_exists(file):
-    #     with open(file, "r") as csv_file:
-    #         reader = csv.reader(csv_file)
-    #         next(reader)
-
-    #         for item in reader:
-    #             if item[search_by] == user_search:
-    #                 search_list.append(item)
-    #                 print(item)
-    #         return search_list, search_by, user_search
 
 def delete_book(file):
 
@@ -211,8 +197,10 @@ def pages_read(file):
 
 
 
-
+# file storing books
 book_list = "book_list.csv"
+
+
 
 # Create Zoe's book list window
 menu_window = tk.Tk()
@@ -233,30 +221,3 @@ s_book = tk.Button(menu_window, text="Search Books", command=lambda: search_book
 menu_window.mainloop()
 
 
-# print("1. Add book")
-# print("2. Search books")
-# print("3. Delete book")
-# print("4. Print books")
-# print("5. Edit book")
-# print("6. Total pages read")
-# print("0. exit menu")
-
-# selection = input()
-
-# if selection == "1":
-#     add_book(book_list)
-# elif selection == "2":
-#     search_book(book_list)
-# elif selection == "3":
-#     delete_book(book_list)
-# elif selection == "4":
-#     p_books(book_list)
-# elif selection == "5":
-#     edit_book(book_list)
-# elif selection == "6":
-#     pages_read(book_list)
-# elif selection == "0":
-#     return None
-# else:
-#     print("Invalid selection")
-#     menu()
