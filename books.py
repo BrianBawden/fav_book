@@ -102,6 +102,9 @@ def search_book(file):
         for i, col_name in enumerate(col_names, start=0):
             tk.Label(search_book_window, text=col_name, padx=10, pady=10).grid(row=3, column=i, padx=10)
 
+        for i in search_list:
+            tk.Label(search_book_window, text=i).grid(row=4, columnspan=5)
+
     search_book_window = tk.Toplevel(menu_window)
     search_book_window.resizable(width=False, height=False)
     search_book_window.geometry("650x350")
