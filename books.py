@@ -86,7 +86,7 @@ def search_book(file):
 
     def search(search_in, search_for):
 
-        # search_list = []
+        search_list = []
         if file_exists(file):
             with open(file, "r") as csv_file:
                 reader = csv.reader(csv_file)
@@ -94,28 +94,32 @@ def search_book(file):
 
                 for item in reader:
                     if item[search_in] == search_for:
-                        # search_list.append(item)
+                        search_list.append(item)
                         print(item)
                 # return search_list, search_in, search_for
 
+        col_names = ("Title","Author","Genre","Pages","Notes")
+        for i, col_name in enumerate(col_names, start=0):
+            tk.Label(search_book_window, text=col_name, padx=10, pady=10).grid(row=3, column=i, padx=10)
+
     search_book_window = tk.Toplevel(menu_window)
     search_book_window.resizable(width=False, height=False)
-    search_book_window.geometry("350x350")
+    search_book_window.geometry("650x350")
     search_book_window.title("Search Books")
 
     r = tk.IntVar()
 
-    tk.Radiobutton(search_book_window, text="Title", variable=r, value=0).pack()
-    tk.Radiobutton(search_book_window, text="Author", variable=r, value=1).pack()
-    tk.Radiobutton(search_book_window, text="Genres", variable=r, value=2).pack()
+    tk.Radiobutton(search_book_window, text="Title", variable=r, value=0).grid(row=0, column=1, pady=10)
+    tk.Radiobutton(search_book_window, text="Author", variable=r, value=1).grid(row=0, column=3, pady=10)
+    tk.Radiobutton(search_book_window, text="Genres", variable=r, value=2).grid(row=0, column=5, pady=10)
 
     user_search = tk.StringVar()
     searching = tk.Entry(search_book_window, textvariable=user_search)
 
-    searching.pack()
+    searching.grid(row=1, column=3)
     
 
-    tk.Button(search_book_window, text="Search", command=lambda: search(r.get(), user_search.get())).pack()
+    tk.Button(search_book_window, text="Search", command=lambda: search(r.get(), user_search.get())).grid(row=2, column=3)
 
     search_book_window.mainloop()
 
