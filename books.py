@@ -86,7 +86,7 @@ def search_book(file):
 
     def search(search_in, search_for):
 
-        search_list = []
+        # search_list = []
         if file_exists(file):
             with open(file, "r") as csv_file:
                 reader = csv.reader(csv_file)
@@ -94,9 +94,9 @@ def search_book(file):
 
                 for item in reader:
                     if item[search_in] == search_for:
-                        search_list.append(item)
+                        # search_list.append(item)
                         print(item)
-                return search_list, search_in, search_for
+                # return search_list, search_in, search_for
 
     search_book_window = tk.Toplevel(menu_window)
     search_book_window.resizable(width=False, height=False)
