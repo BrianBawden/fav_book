@@ -86,24 +86,35 @@ def search_book(file):
 
     def search(search_in, search_for):
 
-        search_list = []
-        if file_exists(file):
-            with open(file, "r") as csv_file:
-                reader = csv.reader(csv_file)
-                next(reader)
-
-                for item in reader:
-                    if item[search_in] == search_for:
-                        search_list.append(item)
-                        print(item)
-                # return search_list, search_in, search_for
-
         col_names = ("Title","Author","Genre","Pages","Notes")
         for i, col_name in enumerate(col_names, start=0):
-            tk.Label(search_book_window, text=col_name, padx=10, pady=10).grid(row=3, column=i, padx=10)
+            tk.Label(search_book_window, text=col_name).grid(row=3, column=i, padx=40)
 
-        for i in search_list:
-            tk.Label(search_book_window, text=i).grid(row=4, columnspan=5)
+
+        with open(file, "r", newline="") as csv_file:
+            reader = csv.reader(csv_file)
+            next(reader)
+            data = list(reader)
+
+        search_list = []
+        for i, item in enumerate(data):
+            if item[search_in] == search_for:
+                search_list.append(item)
+                for col in range(0, 5):
+                    tk.Label(search_book_window, text=item[col]).grid(row=i, column=col)
+                    print(item)
+            # return search_list, search_in, search_for
+
+        # col_names = ("Title","Author","Genre","Pages","Notes")
+        # for i, col_name in enumerate(col_names, start=0):
+        #     tk.Label(search_book_window, text=col_name, padx=10, pady=10).grid(row=3, column=i, padx=10)
+
+        # text = tk.Text(search_book_window, width=400, height=50)
+
+        # text.grid(row=4, columnspan=5,padx=10)
+
+        # for book in search_list:
+        #     text.insert(tk.END, book, "\n")
 
     search_book_window = tk.Toplevel(menu_window)
     search_book_window.resizable(width=False, height=False)
