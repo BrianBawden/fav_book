@@ -88,7 +88,7 @@ def search_book(file):
 
         col_names = ("Title","Author","Genre","Pages","Notes")
         for i, col_name in enumerate(col_names, start=0):
-            tk.Label(search_book_window, text=col_name).grid(row=3, column=i, padx=40)
+            tk.Label(search_book_window, text=col_name).grid(row=3, column=i, padx=10)
 
 
         with open(file, "r", newline="") as csv_file:
@@ -101,20 +101,7 @@ def search_book(file):
             if item[search_in] == search_for:
                 search_list.append(item)
                 for col in range(0, 5):
-                    tk.Label(search_book_window, text=item[col]).grid(row=i, column=col)
-                    print(item)
-            # return search_list, search_in, search_for
-
-        # col_names = ("Title","Author","Genre","Pages","Notes")
-        # for i, col_name in enumerate(col_names, start=0):
-        #     tk.Label(search_book_window, text=col_name, padx=10, pady=10).grid(row=3, column=i, padx=10)
-
-        # text = tk.Text(search_book_window, width=400, height=50)
-
-        # text.grid(row=4, columnspan=5,padx=10)
-
-        # for book in search_list:
-        #     text.insert(tk.END, book, "\n")
+                    tk.Label(search_book_window, text=item[col]).grid(row=i + 4, column=col)
 
     search_book_window = tk.Toplevel(menu_window)
     search_book_window.resizable(width=False, height=False)
@@ -123,17 +110,17 @@ def search_book(file):
 
     r = tk.IntVar()
 
-    tk.Radiobutton(search_book_window, text="Title", variable=r, value=0).grid(row=0, column=1, pady=10)
-    tk.Radiobutton(search_book_window, text="Author", variable=r, value=1).grid(row=0, column=3, pady=10)
-    tk.Radiobutton(search_book_window, text="Genres", variable=r, value=2).grid(row=0, column=5, pady=10)
+    tk.Radiobutton(search_book_window, text="Title", variable=r, value=0).grid(row=0, column=1, pady=1)
+    tk.Radiobutton(search_book_window, text="Author", variable=r, value=1).grid(row=0, column=2, pady=1)
+    tk.Radiobutton(search_book_window, text="Genres", variable=r, value=2).grid(row=0, column=3, pady=1)
 
     user_search = tk.StringVar()
     searching = tk.Entry(search_book_window, textvariable=user_search)
 
-    searching.grid(row=1, column=3)
+    searching.grid(row=1, column=2)
     
 
-    tk.Button(search_book_window, text="Search", command=lambda: search(r.get(), user_search.get())).grid(row=2, column=3)
+    tk.Button(search_book_window, text="Search", command=lambda: search(r.get(), user_search.get())).grid(row=2, column=2)
 
     search_book_window.mainloop()
 
