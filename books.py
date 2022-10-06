@@ -125,20 +125,63 @@ def search_book(file):
     search_book_window.mainloop()
 
 
-
 def delete_book(file):
 
-    delete_list, search_by, user_search = search_book(file)
+    def search(search_in, search_for):
 
-    with open(file, "r") as inp, open("temp_file.csv", "w+") as out:
-        writer = csv.writer(out)
-        for row in csv.reader(inp):
-            if row[search_by] != user_search:
-                writer.writerow(row)
+        with open(file, "r", newline="") as csv_file:
+            reader = csv.reader(csv_file)
+            next(reader)
+            data = list(reader)
 
-        if file_exists(file):
-            os.remove(file)
-            os.rename("temp_file.csv", file)
+        search_list = []
+        for i in data:
+            with open(file, "r") as inp, open("temp_file.csv", "w+") as out:
+                writer = csv.writer(out)
+                for row in csv.reader(inp):
+                    if row[search_in] != search_for:
+                        writer.writerow(row)
+
+                if file_exists(file):
+                    os.remove(file)
+                    os.rename("temp_file.csv", file)
+        view_books(file)
+
+    """
+        delete_list, search_by, user_search = search_book(file)
+
+        with open(file, "r") as inp, open("temp_file.csv", "w+") as out:
+            writer = csv.writer(out)
+            for row in csv.reader(inp):
+                if row[search_by] != user_search:
+                    writer.writerow(row)
+
+            if file_exists(file):
+                os.remove(file)
+                os.rename("temp_file.csv", file)
+    """
+
+    delete_book_window = tk.Toplevel(menu_window)
+    delete_book_window.resizable(width=False, height=False)
+    delete_book_window.geometry("650x350")
+    delete_book_window.title("Delete Books")
+
+    r = tk.IntVar()
+
+    tk.Radiobutton(delete_book_window, text="Title", variable=r, value=0).grid(row=0, column=1, pady=1)
+    tk.Radiobutton(delete_book_window, text="Author", variable=r, value=1).grid(row=0, column=2, pady=1)
+    tk.Radiobutton(delete_book_window, text="Genres", variable=r, value=2).grid(row=0, column=3, pady=1)
+
+    user_search = tk.StringVar()
+    searching = tk.Entry(delete_book_window, textvariable=user_search)
+
+    searching.grid(row=1, column=2)
+    
+
+    tk.Button(delete_book_window, text="Delete", command=lambda: search(r.get(), user_search.get())).grid(row=2, column=2)
+
+    delete_book_window.mainloop()
+
 
 def view_books(file):
 
@@ -221,6 +264,7 @@ a_book = tk.Button(menu_window, text="Add Book", command=lambda: add_book(book_l
 v_book = tk.Button(menu_window, text="View Books", command=lambda: view_books(book_list)).grid(column=0, row=2, padx=20, pady=20)
 v_pages = tk.Button(menu_window, text="Total Pages", command=lambda: pages_read(book_list)).grid(column=0, row=3, padx=20, pady=20)
 s_book = tk.Button(menu_window, text="Search Books", command=lambda: search_book(book_list)).grid(column=1, row=1, padx=20, pady=20)
+d_book = tk.Button(menu_window, text="Delete Books", command=lambda: delete_book(book_list)).grid(column=1, row=2, padx=20, pady=20)
 
 
 menu_window.mainloop()
