@@ -243,10 +243,13 @@ def edit_book(file):
                     os.remove(file)
                     os.rename("temp_file.csv", file)
 
+
     edit_book_window = tk.Toplevel(menu_window)
     edit_book_window.resizable(width=False, height=False)
     edit_book_window.geometry("650x350")
     edit_book_window.title("Edit Books")
+
+
 
     r = tk.IntVar()
 
@@ -261,8 +264,8 @@ def edit_book(file):
     
 
     tk.Button(edit_book_window, text="Edit", command=lambda: [search(r.get(), user_search.get()), add_book(file)]).grid(row=2, column=2)
-    print()
-    add_book(file)
+
+    view_books(file)
 
     edit_book_window.mainloop()
 
