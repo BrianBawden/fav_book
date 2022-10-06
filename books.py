@@ -217,9 +217,56 @@ def view_books(file):
             
 def edit_book(file):
     
+    # this section is to run the program in the terminal
+
     print("What book do you want to edit: ")
     delete_book(file)
     add_book(file)
+
+# This section is to run the GUI
+
+    def search(search_in, search_for):
+
+        with open(file, "r", newline="") as csv_file:
+            reader = csv.reader(csv_file)
+            next(reader)
+            data = list(reader)
+
+        search_list = []
+        for i in data:
+            with open(file, "r") as inp, open("temp_file.csv", "w+") as out:
+                writer = csv.writer(out)
+                for row in csv.reader(inp):
+                    if row[search_in] != search_for:
+                        writer.writerow(row)
+
+                if file_exists(file):
+                    os.remove(file)
+                    os.rename("temp_file.csv", file)
+        view_books(file)
+
+    delete_book_window = tk.Toplevel(menu_window)
+    delete_book_window.resizable(width=False, height=False)
+    delete_book_window.geometry("650x350")
+    delete_book_window.title("Delete Books")
+
+    r = tk.IntVar()
+
+    tk.Radiobutton(delete_book_window, text="Title", variable=r, value=0).grid(row=0, column=1, pady=1)
+    tk.Radiobutton(delete_book_window, text="Author", variable=r, value=1).grid(row=0, column=2, pady=1)
+    tk.Radiobutton(delete_book_window, text="Genres", variable=r, value=2).grid(row=0, column=3, pady=1)
+
+    user_search = tk.StringVar()
+    searching = tk.Entry(delete_book_window, textvariable=user_search)
+
+    searching.grid(row=1, column=2)
+    
+
+    tk.Button(delete_book_window, text="Delete", command=lambda: search(r.get(), user_search.get())).grid(row=2, column=2)
+
+    delete_book_window.mainloop()
+
+    
 
 def pages_read(file):
 
