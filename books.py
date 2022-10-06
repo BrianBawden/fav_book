@@ -219,9 +219,9 @@ def edit_book(file):
     
     # this section is to run the program in the terminal
 
-    print("What book do you want to edit: ")
-    delete_book(file)
-    add_book(file)
+    # print("What book do you want to edit: ")
+    # delete_book(file)
+    # add_book(file)
 
 # This section is to run the GUI
 
@@ -232,7 +232,6 @@ def edit_book(file):
             next(reader)
             data = list(reader)
 
-        search_list = []
         for i in data:
             with open(file, "r") as inp, open("temp_file.csv", "w+") as out:
                 writer = csv.writer(out)
@@ -243,28 +242,29 @@ def edit_book(file):
                 if file_exists(file):
                     os.remove(file)
                     os.rename("temp_file.csv", file)
-        view_books(file)
 
-    delete_book_window = tk.Toplevel(menu_window)
-    delete_book_window.resizable(width=False, height=False)
-    delete_book_window.geometry("650x350")
-    delete_book_window.title("Delete Books")
+    edit_book_window = tk.Toplevel(menu_window)
+    edit_book_window.resizable(width=False, height=False)
+    edit_book_window.geometry("650x350")
+    edit_book_window.title("Edit Books")
 
     r = tk.IntVar()
 
-    tk.Radiobutton(delete_book_window, text="Title", variable=r, value=0).grid(row=0, column=1, pady=1)
-    tk.Radiobutton(delete_book_window, text="Author", variable=r, value=1).grid(row=0, column=2, pady=1)
-    tk.Radiobutton(delete_book_window, text="Genres", variable=r, value=2).grid(row=0, column=3, pady=1)
+    tk.Radiobutton(edit_book_window, text="Title", variable=r, value=0).grid(row=0, column=1, pady=1)
+    tk.Radiobutton(edit_book_window, text="Author", variable=r, value=1).grid(row=0, column=2, pady=1)
+    tk.Radiobutton(edit_book_window, text="Genres", variable=r, value=2).grid(row=0, column=3, pady=1)
 
     user_search = tk.StringVar()
-    searching = tk.Entry(delete_book_window, textvariable=user_search)
+    searching = tk.Entry(edit_book_window, textvariable=user_search)
 
     searching.grid(row=1, column=2)
     
 
-    tk.Button(delete_book_window, text="Delete", command=lambda: search(r.get(), user_search.get())).grid(row=2, column=2)
+    tk.Button(edit_book_window, text="Edit", command=lambda: [search(r.get(), user_search.get()), add_book(file)]).grid(row=2, column=2)
+    print()
+    add_book(file)
 
-    delete_book_window.mainloop()
+    edit_book_window.mainloop()
 
     
 
@@ -312,7 +312,7 @@ v_book = tk.Button(menu_window, text="View Books", command=lambda: view_books(bo
 v_pages = tk.Button(menu_window, text="Total Pages", command=lambda: pages_read(book_list)).grid(column=0, row=3, padx=20, pady=20)
 s_book = tk.Button(menu_window, text="Search Books", command=lambda: search_book(book_list)).grid(column=1, row=1, padx=20, pady=20)
 d_book = tk.Button(menu_window, text="Delete Books", command=lambda: delete_book(book_list)).grid(column=1, row=2, padx=20, pady=20)
-
+d_book = tk.Button(menu_window, text="Edit Books", command=lambda: edit_book(book_list)).grid(column=1, row=3, padx=20, pady=20)
 
 menu_window.mainloop()
 
