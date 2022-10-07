@@ -315,7 +315,7 @@ v_book = tk.Button(menu_window, text="View Books", command=lambda: view_books(bo
 v_pages = tk.Button(menu_window, text="Total Pages", command=lambda: pages_read(book_list)).grid(column=0, row=3, padx=20, pady=20)
 s_book = tk.Button(menu_window, text="Search Books", command=lambda: search_book(book_list)).grid(column=1, row=1, padx=20, pady=20)
 d_book = tk.Button(menu_window, text="Delete Books", command=lambda: delete_book(book_list)).grid(column=1, row=2, padx=20, pady=20)
-e_book = tk.Button(menu_window, text="Edit Books", command=lambda: edit_book(book_list)).grid(column=1, row=3, padx=20, pady=20)
+d_book = tk.Button(menu_window, text="Edit Books", command=lambda: edit_book(book_list)).grid(column=1, row=3, padx=20, pady=20)
 
 menu_window.mainloop()
 
