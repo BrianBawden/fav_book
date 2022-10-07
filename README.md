@@ -8,6 +8,6 @@ This program is designed to allow a user to keep track of the books they have re
 
 ## To do List
 
-* Get user name
-* create options for what the user wants to do.
-* create a file to store the data entered by the user
+* make a file that uses a class instead of functions.
+* update search button to check for any match and ignore upper or lower case
+* clean up the repetition of code in the different functions. 
