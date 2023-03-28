@@ -300,14 +300,14 @@ book_list = "book_list.csv"
 
 
 
-# Create Zoe's book list window
+# Create Favorite book list window
 menu_window = tk.Tk()
 menu_window.geometry("350x350")
 # menu_window.eval("tk::PlaceWindow . center")
-menu_window.title("Zoe's Books")
+menu_window.title("Favorite Books")
 
 
-zoes_label = tk.Label(menu_window, text="Zoe's Books App", font="bold 20").grid(column=0, row=0, columnspan=3, padx=20, pady=20)
+zoes_label = tk.Label(menu_window, text="Favorite Books App", font="bold 20").grid(column=0, row=0, columnspan=3, padx=20, pady=20)
 
 
 a_book = tk.Button(menu_window, text="Add Book", command=lambda: add_book(book_list)).grid(column=0, row=1, padx=20, pady=20)
